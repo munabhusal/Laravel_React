@@ -1,9 +1,9 @@
 function User() {
 
     return (
-      <>
-      Users
-      </>
+      <div className="container">
+        Users page.
+      </div>
     )
   }
   
