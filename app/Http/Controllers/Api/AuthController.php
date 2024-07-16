@@ -23,15 +23,14 @@ class AuthController extends Controller
         return response(compact('user', 'token'));
 
     }
+
     public function login(LoginRequest $request){
         $credentials = $request->validated();
-
         if(!Auth::attempt($credentials)){
             return response([
                 'message'=>"Provided data didn't matched!"
             ], status:422);
         }
-
         /** @var User $user */
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
