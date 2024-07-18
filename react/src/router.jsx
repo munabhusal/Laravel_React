@@ -6,6 +6,8 @@ import Login from "./assets/views/Login";
 import DefaultLayout from "./assets/components/DefaultLayout";
 import GuestLayout from "./assets/components/GuestLayout";
 import Dashboard from "./assets/views/Dashboard";
+import UserForm from "./assets/views/UserForm";
+import UserCreate from "./assets/views/UserCreate";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
             {
                 path: '/users',
                 element: <Users/>
+            },
+            {
+                path: '/users/new',
+                element: <UserCreate/>
+            },
+            {
+                path: '/users/:id',
+                element: <UserForm/>
             }
         ]
     },
