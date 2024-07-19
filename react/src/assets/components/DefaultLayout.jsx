@@ -19,7 +19,6 @@ function DefaultLayout() {
 
         <main>
           <Outlet/>
-          Hello World!
         </main>
 
         
