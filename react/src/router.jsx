@@ -7,7 +7,6 @@ import DefaultLayout from "./assets/components/DefaultLayout";
 import GuestLayout from "./assets/components/GuestLayout";
 import Dashboard from "./assets/views/Dashboard";
 import UserForm from "./assets/views/UserForm";
-import UserCreate from "./assets/views/UserCreate";
 
 const router = createBrowserRouter([
     {
