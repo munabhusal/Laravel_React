@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import axiosClient from "../../axios_client";
 import {Link } from "react-router-dom"
+import PaginationLinks from "./PaginationLinks";
 
 function User() {
 
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
+  const [meta, setMeta] = useState(false)
 
   useEffect(()=>{
     getUsers();
@@ -25,17 +27,26 @@ function User() {
   }
  
 
-  const getUsers= () => {
+  const getUsers= (url) => {
+    url = url || "/users"
     setLoading(true)
-    axiosClient.get("/users")
-    .then(({data})=>{
-      setLoading(false)      
+    axiosClient.get(url)
+    .then(({data})=>{     
       setUsers(data.data)
+      setMeta(data.meta)
+      setLoading(false)
+      // console.log(meta) 
     })
     .catch(()=>{
       setLoading(false)
     })
   }
+
+  const onPageChange = (link)=>{
+    getUsers(link.url)
+  }
+
+
     return (
       <div className="container">
         <div className="row">
@@ -61,11 +72,13 @@ function User() {
           </thead>
           {loading && <tbody>
             <tr>
-              <td colSpan={4} className="text-center">Loading...</td>
+              <td colSpan={4} className="text-center">
+                <span class="sr-only">Loading...</span>
+              </td>
+              
             </tr>
           </tbody>
 }
-
           <tbody>
           {users?.map(user => {
             
@@ -85,10 +98,15 @@ function User() {
           </tbody>  
         </table>
 
-
+{meta && <div>
+            <div>
+                <PaginationLinks meta={meta} onPageChange= {onPageChange}/>
+            </div>
+          </div>
+}
       </div>
-    )
+    )    
   }
   
-  export default User
+export default User
   
