@@ -8,6 +8,8 @@ function User() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
   const [meta, setMeta] = useState(false)
+  const [errors, setErrors] = useState(null)
+
 
   useEffect(()=>{
     getUsers();
@@ -26,7 +28,6 @@ function User() {
     })
   }
  
-
   const getUsers= (url) => {
     url = url || "/users"
     setLoading(true)
@@ -35,10 +36,14 @@ function User() {
       setUsers(data.data)
       setMeta(data.meta)
       setLoading(false)
-      // console.log(meta) 
     })
-    .catch(()=>{
-      setLoading(false)
+    .catch(err => {
+      const response = err.response;
+      if(response && response.status === 403){
+        // console.log(err.response.data);
+        setErrors(err.response.data);
+    }    
+    setLoading(false)
     })
   }
 
@@ -48,9 +53,25 @@ function User() {
 
 
     return (
+
       <div className="container">
+
+{errors &&<>
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    
+    
+  {Object.keys(errors).map(key=>(
+      <strong><span key={key}>{errors[key]}</span></strong>
+
+))}
+</div>
+   
+</>}
+
+{!errors &&<>
         <div className="row">
-          <div className="col-9">
+      <div className="col-9">
           <h3>User's List</h3>
           </div>
           <div className="col-3">
@@ -98,12 +119,15 @@ function User() {
           </tbody>  
         </table>
 
-{meta && <div>
+        {meta && <div>
             <div>
                 <PaginationLinks meta={meta} onPageChange= {onPageChange}/>
             </div>
           </div>
-}
+        }
+
+        
+</>}
       </div>
     )    
   }

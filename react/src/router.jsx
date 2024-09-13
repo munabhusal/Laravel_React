@@ -7,6 +7,8 @@ import DefaultLayout from "./assets/components/DefaultLayout";
 import GuestLayout from "./assets/components/GuestLayout";
 import Dashboard from "./assets/views/Dashboard";
 import UserForm from "./assets/views/UserForm";
+import Welcome from "./assets/views/Welcome";
+import Profile from "./assets/views/profile";
 
 const router = createBrowserRouter([
     {
@@ -14,13 +16,11 @@ const router = createBrowserRouter([
         element: <DefaultLayout/>,
         children:[
             {
-                path: '/',
-                element: <Navigate to="/users" />
-            },
-            {
                 path: '/dashboard',
                 element: <Dashboard/>
             },
+
+            //Users
             {
                 path: '/users',
                 element: <Users/>
@@ -32,6 +32,12 @@ const router = createBrowserRouter([
             {
                 path: '/users/:id',
                 element: <UserForm/>
+            },
+
+            //Profile
+            {
+                path: '/profile',
+                element: <Profile/>
             }
         ]
     },
@@ -49,6 +55,13 @@ const router = createBrowserRouter([
                 element: <Signup/>
             }
         ]
+    },
+    
+    {
+        path: '/',
+        // element: <Navigate to="/users" />
+        element: <Welcome/>
+
     },
 
     {

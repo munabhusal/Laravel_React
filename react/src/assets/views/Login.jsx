@@ -20,7 +20,7 @@ function Login() {
     setMsg(null);
 
 // console.log(payload)
-    axiosClient.post('/login', payload)
+    axiosClient.patch('/login', payload)
       .then(({data})=>{
         setUser(data.user)
         setToken(data.token)        
