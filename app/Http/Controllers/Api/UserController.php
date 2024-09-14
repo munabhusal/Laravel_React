@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Role;
+use GuzzleHttp\Psr7\Request;
 
 class UserController extends Controller
 {
@@ -29,6 +31,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['password']= bcrypt($data['password']);
+        $data['role_id']=Role::where('role','User')->first()->id;
         $user = User::create($data);
         return response(new UserResource($user), 201);
     }
@@ -62,4 +65,13 @@ class UserController extends Controller
         $user->delete();
         return response("", 204);
     }
+
+    public function userstatus(Request $request)
+    {
+        // $user = User::where('id', $request->id)->update(['role_id'=>2])
+        // return response("");
+
+        
+    }
+
 }

@@ -18,7 +18,6 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($request['password']),
-            // 'role_id'=>1
             'role_id'=>Role::where('role','User')->first()->id
 
         ]);

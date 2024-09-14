@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CatagoryRequest;
-use App\Http\Resources\CatagoryResource;
-use App\Models\Catagory;
+use App\Http\Requests\TagRequest;
+use App\Http\Resources\TagResource;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class CatagoryController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return CatagoryResource::collection(
-            Catagory::query()->orderBy('id', 'desc')->paginate(10)
+        return TagResource::collection(
+            Tag::query()->orderBy('id', 'desc')->paginate(10)
         );
     }
 
@@ -25,31 +25,31 @@ class CatagoryController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CatagoryRequest $request)
+    public function store(TagRequest $request)
     {
         $data = $request->validated();
-        $cata = Catagory::create($data);
-        return response(new CatagoryResource($cata), 201);
+        $tag = Tag::create($data);
+        return response(new TagResource($tag), 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Catagory $catagory)
+    public function show(Tag $tag)
     {
-        return new CatagoryResource($catagory);
+        return new TagResource($tag);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(String $id)
     {
         //
     }
@@ -57,20 +57,22 @@ class CatagoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CatagoryRequest $request, Catagory $catagory)
+    public function update(TagRequest $request, Tag $tag)
     {
         $data =  $request->validated();
     
-        $catagory->update($data);
-        return new CatagoryResource($catagory);
+        $tag->update($data);
+        return new TagResource($tag);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Catagory $catagory)
+    public function destroy(Tag $tag)
     {
-        $catagory->delete();
-        return response("", 204);
+        return response(new TagResource($tag), 201);
+
+        // $tag->delete();
+        // return response("", 204);
     }
 }
