@@ -9,6 +9,13 @@ import Dashboard from "./assets/views/Dashboard";
 import UserForm from "./assets/views/UserForm";
 import Welcome from "./assets/views/Welcome";
 import Profile from "./assets/views/profile";
+import Catagory from "./assets/views/Catagory";
+import Tags from "./assets/views/Tags";
+import Feeds from "./assets/views/Feeds";
+import MyPost from "./assets/views/MyPost";
+import CataForm from "./assets/views/CataForm";
+import TagForm from "./assets/views/TagForm";
+
 
 const router = createBrowserRouter([
     {
@@ -34,11 +41,58 @@ const router = createBrowserRouter([
                 element: <UserForm/>
             },
 
+            //Catagory
+            {
+                path: '/catagories',
+                element: <Catagory/>
+            },
+            {
+                path: '/catagory/new',
+                element: <CataForm/>
+            },
+            {
+                path: '/catagory/:id',
+                element: <CataForm/>
+            },
+
+            //Tags
+            {
+                path: '/tags',
+                element: <Tags/>
+            },
+            {
+                path: '/tags/new',
+                element: <TagForm/>
+            },
+            {
+                path: '/tags/:id',
+                element: <TagForm/>
+            },
+
+            //Feeds
+            {
+                path: '/feeds',
+                element: <Feeds/>
+            },
+
+            //my post
+            {
+                path: '/mypost',
+                element: <MyPost/>
+            },
+
             //Profile
             {
                 path: '/profile',
                 element: <Profile/>
-            }
+            },
+        
+            {
+                path: '/',
+                // element: <Navigate to="/users" />
+                element: <Welcome/>
+
+            },
         ]
     },
     {
@@ -55,13 +109,6 @@ const router = createBrowserRouter([
                 element: <Signup/>
             }
         ]
-    },
-    
-    {
-        path: '/',
-        // element: <Navigate to="/users" />
-        element: <Welcome/>
-
     },
 
     {

@@ -1,5 +1,3 @@
-
-
 function Welcome() {
 
     return (

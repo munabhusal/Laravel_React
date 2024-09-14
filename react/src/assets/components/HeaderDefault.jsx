@@ -45,18 +45,20 @@ function HeaderDefault() {
         {user.role_id ==2 && <>
         
         <li className="nav-item">
-          <Link className="navbar-brand" to="/catagories">Catagory</Link>
+          <Link className="nav-link" to="/catagories">Catagory</Link>
         </li>
 
         <li className="nav-item">
-        <Link className="navbar-brand" to="/tags">Tags</Link>
+        <Link className="nav-link" to="/tags">Tags</Link>
         </li>
-
+        
         <li className="nav-item">
-        <Link className="navbar-brand" to="/posts">MyPost</Link>
-        </li> <li className="nav-item">
           <Link className="nav-link" aria-current="page" to="/users">Users</Link>
-        </li>        
+        </li>  
+
+        <li className="nav-item">
+        <Link className="nav-link" to="/mypost">MyPost</Link>
+        </li>      
         </> }
 
       </ul>

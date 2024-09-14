@@ -27,6 +27,20 @@ function User() {
       getUsers();
     })
   }
+
+  const onChangeStatus=(id)=>{
+    
+    if(!window.confirm("Are you sure you change the status of the user?")){
+      return;
+    }    
+    // axiosClient.patch(`/userstatus/${user.id}`)
+    // .then(()=>{
+      //to show notification
+
+      // getUsers();
+    // })
+
+  }
  
   const getUsers= (url) => {
     url = url || "/users"
@@ -109,6 +123,21 @@ function User() {
               <td>{user.email}</td>
               <td>
           <Link type="button" className="btn btn-warning" to={"/users/"+user.id}>Edit</Link>
+          {'\t'}
+
+          {user.is_blocked <2 &&   
+          <Link type="button" className="btn btn-success" onClick={ev=>onChangeStatus(user.id)}>
+            {user.role_id == 2 &&<i class="bi bi-0-circle">A</i>}
+            {user.role_id == 1 &&<i class="bi bi-0-circle">U</i>}
+            </Link>
+          }
+
+          {user.is_blocked == 2 &&   
+          <Link type="button" className="btn btn-success" onClick={ev=>onChangeStatus(user.id)}>
+            {user.role_id == 2 &&<i class="bi bi-0-circle">A</i>}
+            {user.role_id == 1 &&<i class="bi bi-0-circle">U</i>}
+            </Link>
+          }
           {'\t'}
           <button type="button" className="btn btn-danger" onClick={ev=>onDelete(user)}>Delete</button>
                 
