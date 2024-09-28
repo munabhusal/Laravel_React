@@ -1,12 +1,14 @@
 import {Link } from "react-router-dom"
 import { useEffect } from "react"
 import axiosClient from "../../axios_client";
-import { useStateContext } from "../../contexts/contextProvider"
+import { useStateContext } from  "../../contexts/contextProvider"
+import Search from "./Search";
+
 
 
 function HeaderDefault() {
 
-  const {user, setUser, setToken} = useStateContext()
+  const {user, notification , setUser, setToken} = useStateContext()
 
   // console.log(user);
   
@@ -56,17 +58,14 @@ function HeaderDefault() {
           <Link className="nav-link" aria-current="page" to="/users">Users</Link>
         </li>  
 
-        <li className="nav-item">
-        <Link className="nav-link" to="/mypost">MyPost</Link>
-        </li>      
+<li className="nav-item">
+<Link className="nav-link" to="/mypost">MyPost</Link>
+</li>     
         </> }
 
       </ul>
-
-      <form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      
+      <Search/>
 
       <ul className="navbar-nav">
 
@@ -86,6 +85,11 @@ function HeaderDefault() {
     </div>
   </div>
 </nav>
+
+{notification && <div  class="alert alert-warning" role="alert">
+  {notification}
+</div>
+}
 
 
       </div>

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Blog;
+use App\Models\Catagory;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,8 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CatagorySeeder::class,
             BlogSeeder::class,
-        ]);        
-        // Catagory::factory(5)->create();
-        // Tag::factory(15)->create();
+        ]);    
+
     }
 }

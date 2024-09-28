@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axiosClient from "../../axios_client";
 import {Link } from "react-router-dom"
 import PaginationLinks from "./PaginationLinks";
+import { useStateContext } from "../../contexts/contextProvider";
 
 function Tags() {
 
@@ -10,6 +11,7 @@ function Tags() {
   const [loading, setLoading] = useState(false)
   const [meta, setMeta] = useState(false)
   const [errors, setErrors] = useState(null)
+  const {setNotification} = useStateContext()
 
   
 
@@ -25,7 +27,8 @@ function Tags() {
 
     axiosClient.delete(`/tags/${tag.id}`)
     .then(()=>{
-      //to show notification
+      setNotification("Tag Deleted Successfully.")
+
 
       gettags();
     })

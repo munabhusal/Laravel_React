@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Role;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -30,8 +31,23 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $data = $request->validated();
+
+        if(Auth::check()){
+
+            if(isset($request->role_id)){
+                $data['role_id']= $request->role_id;
+            }
+
+            if(isset($request->is_blocked)){
+                $data['is_blocked']= $request->is_blocked;
+            }
+
+        }else{
+            $data['role_id']=Role::where('role','User')->first()->id;
+        }
+
         $data['password']= bcrypt($data['password']);
-        $data['role_id']=Role::where('role','User')->first()->id;
+
         $user = User::create($data);
         return response(new UserResource($user), 201);
     }
@@ -50,6 +66,19 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data =  $request->validated();
+
+        if(Auth::check()){             
+
+            if(isset($request->role_id)){
+                $data['role_id']= $request->role_id;
+            }
+
+            if(isset($request->is_blocked)){
+                $data['is_blocked']= $request->is_blocked;
+            }
+            
+        }
+
         if(isset($data['password'])){
             $data['password']= bcrypt($data['password']);
         }

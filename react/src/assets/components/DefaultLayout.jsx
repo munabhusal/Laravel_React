@@ -20,8 +20,7 @@ function DefaultLayout() {
         <main>
           <Outlet/>
         </main>
-
-        
+                
       </div>
     )
   }

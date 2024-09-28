@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CatagoryRequest;
+use App\Http\Requests\UpdateCatagoryRequest;
 use App\Http\Resources\CatagoryResource;
 use App\Models\Catagory;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class CatagoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CatagoryRequest $request, Catagory $catagory)
+    public function update(UpdateCatagoryRequest $request, Catagory $catagory)
     {
         $data =  $request->validated();
     

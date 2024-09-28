@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import axiosClient from "../../axios_client";
 import {Link } from "react-router-dom"
 import PaginationLinks from "./PaginationLinks";
+import { useStateContext } from "../../contexts/contextProvider";
+
 
 function User() {
 
@@ -9,6 +11,7 @@ function User() {
   const [loading, setLoading] = useState(false)
   const [meta, setMeta] = useState(false)
   const [errors, setErrors] = useState(null)
+  const {setNotification} = useStateContext()
 
 
   useEffect(()=>{
@@ -21,10 +24,10 @@ function User() {
     }
 
     axiosClient.delete(`/users/${user.id}`)
-    .then(()=>{
-      //to show notification
-
+    .then(()=>{    
       getUsers();
+      setNotification("User Deleted Successfully.")
+
     })
   }
 
@@ -32,14 +35,7 @@ function User() {
     
     if(!window.confirm("Are you sure you change the status of the user?")){
       return;
-    }    
-    // axiosClient.patch(`/userstatus/${user.id}`)
-    // .then(()=>{
-      //to show notification
-
-      // getUsers();
-    // })
-
+    }
   }
  
   const getUsers= (url) => {
@@ -126,14 +122,14 @@ function User() {
           {'\t'}
 
           {user.is_blocked <2 &&   
-          <Link type="button" className="btn btn-success" onClick={ev=>onChangeStatus(user.id)}>
+          <Link type="button" className="btn btn-success">
             {user.role_id == 2 &&<i class="bi bi-0-circle">A</i>}
             {user.role_id == 1 &&<i class="bi bi-0-circle">U</i>}
             </Link>
           }
 
-          {user.is_blocked == 2 &&   
-          <Link type="button" className="btn btn-success" onClick={ev=>onChangeStatus(user.id)}>
+          {user.is_blocked >= 2 &&   
+          <Link type="button" className="btn btn-danger">
             {user.role_id == 2 &&<i class="bi bi-0-circle">A</i>}
             {user.role_id == 1 &&<i class="bi bi-0-circle">U</i>}
             </Link>

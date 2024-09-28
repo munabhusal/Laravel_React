@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axiosClient from "../../axios_client";
 import {Link } from "react-router-dom"
 import PaginationLinks from "./PaginationLinks";
+import { useStateContext } from "../../contexts/contextProvider";
 
 function Catagory() {
 
@@ -10,7 +11,7 @@ function Catagory() {
   const [loading, setLoading] = useState(false)
   const [meta, setMeta] = useState(false)
   const [errors, setErrors] = useState(null)
-
+  const {setNotification} = useStateContext()
   
 
   useEffect(()=>{
@@ -25,9 +26,10 @@ function Catagory() {
 
     axiosClient.delete(`/catagories/${cata.id}`)
     .then(()=>{
-      //to show notification
 
       getCatagories();
+      setNotification("Catagory Deleted Successfully.")
+
     })
   }
  

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import axiosClient from "../../axios_client"
-
+import { useStateContext } from "../../contexts/contextProvider";
 
 function TagForm() {
 
@@ -9,6 +9,7 @@ function TagForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState(null)
+  const {setNotification} = useStateContext()
 
   const [Tag, setTag] = useState({
     id: null,
@@ -17,7 +18,7 @@ function TagForm() {
 
   if(id){
     useEffect(()=>{
-      setLoading(true)
+      setLoading(true)  
       axiosClient.get(`/tags/${id}`)
       .then(({data})=>{      
         setLoading(false)
@@ -36,6 +37,8 @@ function TagForm() {
       axiosClient.put(`/tags/${Tag.id}`, Tag)
       .then(()=>{
         navigate('/tags')
+        setNotification("Tag Updated Successfully.")
+
       })
       .catch(err => {
         const response = err.response;
@@ -47,6 +50,8 @@ function TagForm() {
       axiosClient.post("/tags", Tag)
       .then(()=>{
         navigate('/tags')
+        setNotification("Tag Added Successfully.")
+
       })
       .catch(err => {
         const response = err.response;
@@ -85,7 +90,7 @@ function TagForm() {
           <div className="mb-3">
 
               <label className="form-label">Tag Name</label>
-              <input value={Tag.tag} onChange={ev=>setTag({...Tag, tag:ev.target.value})} ype="text" className="form-control" id="exampleInputEmail0" placeholder="Tag Name" aria-describedby="emailHelp"/>
+              <input value={Tag.tag} onChange={ev=>setTag({...Tag, tag:ev.target.value})} ype="text" className="form-control"  placeholder="Tag Name"/>
           </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
                 

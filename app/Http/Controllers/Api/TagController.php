@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TagRequest;
+use App\Http\Requests\UpdateTagRequest;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TagRequest $request, Tag $tag)
+    public function update(UpdateTagRequest $request, Tag $tag)
     {
         $data =  $request->validated();
     

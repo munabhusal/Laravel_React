@@ -39,7 +39,7 @@ class AuthController extends Controller
                 $user = User::where('email', $request->email)->firstOrFail();
                 $attempts = $user->is_blocked;
                 $msg = 'Provided data didn\'t matched. Only ' . 3- $attempts . ' attempt left.';
-                if($attempts == 2){
+                if($attempts <= 2){
                     $msg = 'Provided data didn\'t matched. ' . 'Last attempt left.';
                 }
             }

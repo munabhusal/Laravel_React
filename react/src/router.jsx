@@ -13,8 +13,10 @@ import Catagory from "./assets/views/Catagory";
 import Tags from "./assets/views/Tags";
 import Feeds from "./assets/views/Feeds";
 import MyPost from "./assets/views/MyPost";
+import MyPostForm from "./assets/views/MyPostForm";
 import CataForm from "./assets/views/CataForm";
 import TagForm from "./assets/views/TagForm";
+import ReadMore from "./assets/views/ReadMore";
 
 
 const router = createBrowserRouter([
@@ -79,6 +81,18 @@ const router = createBrowserRouter([
             {
                 path: '/mypost',
                 element: <MyPost/>
+            },
+            {
+                path: '/blogs/new',
+                element: <MyPostForm/>
+            },
+            {
+                path: '/blogs/:id',
+                element: <MyPostForm/>
+            },
+            {
+                path: '/blogs/readmore/:id',
+                element: <ReadMore/>
             },
 
             //Profile

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import axiosClient from "../../axios_client"
+import { useStateContext } from "../../contexts/contextProvider";
+
 
 
 function CataForm() {
@@ -9,6 +11,8 @@ function CataForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState(null)
+  const {setNotification} = useStateContext()
+
 
   const [Cata, setCatagory] = useState({
     id: null,
@@ -36,6 +40,8 @@ function CataForm() {
       axiosClient.put(`/catagories/${Cata.id}`, Cata)
       .then(()=>{
         navigate('/catagories')
+        setNotification("Catagory List Updated Successfully.")
+
       })
       .catch(err => {
         const response = err.response;
@@ -47,6 +53,8 @@ function CataForm() {
       axiosClient.post("/catagories", Cata)
       .then(()=>{
         navigate('/catagories')
+        setNotification("New Catagory Added Successfully.")
+
       })
       .catch(err => {
         const response = err.response;

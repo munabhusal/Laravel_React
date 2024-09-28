@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('slug');
             $table->string('body');
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedBigInteger('catagory_id')->nullable();
+            $table->unsignedBigInteger('catagory_id');
             $table->foreign('catagory_id')->references('id')->on('catagories');
             
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('status');
 
             $table->timestamps();
