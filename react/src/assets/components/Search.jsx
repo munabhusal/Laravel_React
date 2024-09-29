@@ -8,25 +8,28 @@ function Search() {
   const [filtered, setSearch] = useState('');
   const [filter_tags, setFilterTags] = useState([])
   const [filter_cata, setFilterCata] = useState([])
-  console.log(filtered);
+// console.log(filter_cata.length, filter_tags.length)
+
+const clearSearch=()=>{
+  setSearch('')
+
+}
 
   const fetchData = (value)=>{
     
-    axiosClient.get(`/catagories`)
+    axiosClient.get(`/search_catagory/${value}`)
     .then(({data})=>{
         setFilterCata(data.data)
     })
-    .catch(()=>{ 
-        
+    .catch(()=>{         
     })
 
     
-    axiosClient.get(`/tags`)
+    axiosClient.get(`/search_tag/${value}`)
     .then(({data})=>{
         setFilterTags(data.data)
     })
-    .catch(()=>{ 
-        
+    .catch(()=>{         
     })
 
   }
@@ -49,31 +52,39 @@ function Search() {
 
 {filtered &&<>
 <div className="row">
-    <div className="col-md-6">
+
+{filter_cata.length!==0 &&<>
+    <div className="col-md-12">
 <p><b>Catagories</b></p>
 
 
     {filter_cata?.map(cat => {
-            return(<p>            
-                <Link>{cat.catagory}</Link>
+            return(<p>    
+    <Link to={"/catagoryfeeds/"+cat.id} onClick={clearSearch}>{cat.catagory}</Link>
           </p>)
 
 })}
 </div>
 
+</>}
+
+{filter_tags.length!==0 &&<>
 
     
-    <div className="col-md-6">
+    <div className="col-md-12">
 <p><b>Tags</b></p>
 
     {filter_tags?.map(ta => {
-            return(<p>            
-                <Link>{ta.tag}</Link>
+            return(<p>  
+    <Link to={"/tagfeeds/"+ta.id} onClick={clearSearch}>{ta.tag}  </Link>
+                        
           </p>)
 
 })}
 
     </div>
+
+    </>}
 </div>
 
 

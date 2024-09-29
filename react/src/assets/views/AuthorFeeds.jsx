@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import axiosClient from "../../axios_client";
-import {Link } from "react-router-dom"
+import {Link , useParams} from "react-router-dom"
 import PaginationLinks from "./PaginationLinks";
 
-function Feeds() {
 
+function AuthorFeeds() {
+
+  const {id} = useParams()
   const [myposts, setMyPost] = useState([])
   const [loading, setLoading] = useState(false)
   const [meta, setMeta] = useState(false)
@@ -16,20 +18,20 @@ function Feeds() {
   }, [])
 
  
-  const getMyPost= (url) => {
-    url = url || "/show_feeds"
+  const getMyPost= () => {
     setLoading(true)
-    axiosClient.get(url)
+    axiosClient.get(`author_feeds/${id}`)
     .then(({data})=>{     
       setMyPost(data.data)
       setMeta(data.meta)
       setLoading(false)
-      // console.log(data)
+      console.log(data)
     })
     .catch(err => {
       const response = err.response;
+      console.log(err.response.data);
+
       if(response && response.status === 403){
-        // console.log(err.response.data);
         setErrors(err.response.data);
     }    
     setLoading(false)
@@ -87,6 +89,9 @@ function Feeds() {
       <p class="card-text">{post.body}</p>
 
       <Link to={"/blogs/readmore/"+post.id}>Read more</Link>
+      
+    {/* <a href="#" class="card-link">Read more</a> */}
+
         
         <small class="text-muted"> || {post.created_at}</small>
         
@@ -114,4 +119,4 @@ function Feeds() {
     )    
   }
   
-export default Feeds
+export default AuthorFeeds

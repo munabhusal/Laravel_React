@@ -95,7 +95,7 @@ function MyPostForm() {
     const request_data = {...Post, 'tag':tag, 'image':image}
 
 
-    console.log(request_data)
+    // console.log(request_data)
     ev.preventDefault();
   
     if(request_data.id){
@@ -120,7 +120,7 @@ function MyPostForm() {
       
       })
       .catch(err => {
-        console.log(Post)
+        // console.log(Post)
         const response = err.response;
         if(response && response.status === 422){
           setErrors(response.data.errors);

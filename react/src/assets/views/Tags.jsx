@@ -42,12 +42,12 @@ function Tags() {
       setTags(data.data)
       setMeta(data.meta)
       setLoading(false)
-      console.log(data)
+      // console.log(data)
     })
     .catch(err => {
       const response = err.response;
       if(response && response.status === 403){
-        console.log(err.response.data);
+        // console.log(err.response.data);
         setErrors(err.response.data);
     }    
     setLoading(false)

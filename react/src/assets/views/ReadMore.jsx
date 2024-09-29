@@ -1,6 +1,7 @@
-import {useParams } from "react-router-dom"
+import {useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axiosClient from "../../axios_client";
+
 
 
 function ReadMore() {
@@ -15,7 +16,8 @@ const [myuser, setMyUser] = useState([])
 
 useEffect(()=>{
   setLoading(true)  
-  axiosClient.get(`/blogs/${id}`)
+  // console.log(id)
+  axiosClient.get(`show_blog/${id}`)
   .then(({data})=>{      
     setLoading(false)
     setDoc(data.result)
@@ -54,12 +56,14 @@ useEffect(()=>{
 <hr />
 
   <div class="card-body">
-    <b>Author: </b>
-  <a href="#" class="card-link">{myuser.name}</a>
+    <b>Author: </b> 
+    <Link to={"/authorfeeds/"+myuser.id}>{myuser.name}</Link>
 
     <br />
     <b>Catagory: </b>
-  <a href="#" class="card-link">{mycata.catagory}</a>
+    <Link to={"/catagoryfeeds/"+mycata.id}>{mycata.catagory}</Link>
+
+  {/* <a href="#" class="card-link">{mycata.catagory}</a> */}
 
     <br />
 
@@ -67,9 +71,9 @@ useEffect(()=>{
 
     {mytags?.map(tag => { 
                   return(
-                    <a href="#" class="card-link">
-                        {tag.tag}
-                    </a>
+
+    <Link to={"/tagfeeds/"+tag.id}>{tag.tag} &nbsp || &nbsp  </Link>
+
             )
             })}
 

@@ -17,6 +17,9 @@ import MyPostForm from "./assets/views/MyPostForm";
 import CataForm from "./assets/views/CataForm";
 import TagForm from "./assets/views/TagForm";
 import ReadMore from "./assets/views/ReadMore";
+import AuthorFeeds from "./assets/views/AuthorFeeds";
+import CatagoryFeeds from "./assets/views/CatagoryFeeds";
+import TagFeeds from "./assets/views/TagFeeds";
 
 
 const router = createBrowserRouter([
@@ -76,7 +79,19 @@ const router = createBrowserRouter([
                 path: '/feeds',
                 element: <Feeds/>
             },
-
+            {
+                path: '/authorfeeds/:id',
+                element: <AuthorFeeds/>
+            },
+            {
+                path: '/catagoryfeeds/:id',
+                element: <CatagoryFeeds/>
+            },
+            {
+                path: '/tagfeeds/:id',
+                element: <TagFeeds/>
+            },
+            
             //my post
             {
                 path: '/mypost',

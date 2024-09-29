@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\CatagoryController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     });
 
-    // Route::get('/blogs/{id}', BlogController::class,'show');
+    Route::get('/show_blog/{id}', [PostController::class, 'show_blog']);
+    Route::get('/show_feeds', [PostController::class, 'show_feeds']);
+    Route::get('/author_feeds/{id}', [PostController::class, 'author_feeds']);
+    Route::get('/catagory_feeds/{id}', [PostController::class, 'catagory_feeds']);
+    Route::get('/tag_feeds/{id}', [PostController::class, 'tag_feeds']);
+    Route::get('/search_catagory/{search}', [PostController::class, 'search_catagory']);
+    Route::get('/search_tag/{search}', [PostController::class, 'search_tag']);
+
+
 
 
 Route::post('/logout', [AuthController::class, 'logout']);
