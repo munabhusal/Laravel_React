@@ -17,20 +17,30 @@ cd Laravel_React
 
 To run the backend portion
 
+### Laravel Portion
+
 ```bash
 composer update
 ```
+
+copy '.env.example' file and rename it to .env
+- Manage DB_CONNECTION part as per the requirement, I am keeping it sqlite
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
 ```bash
 php artisan serve
 ```
+
+### React Portion
 
 To run the Frontend portion (on diffrent terminal)
 
 ```bash
 cd react
-```
-
-```bash
 npm install
 ```
 

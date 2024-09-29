@@ -115,9 +115,7 @@ function MyPostForm() {
       axiosClient.post("/blogs", request_data)
       .then(()=>{
         navigate('/mypost')
-        setNotification("New Blog Added Successfully.")      
-
-      
+        setNotification("New Blog Added Successfully.")   
       })
       .catch(err => {
         // console.log(Post)
